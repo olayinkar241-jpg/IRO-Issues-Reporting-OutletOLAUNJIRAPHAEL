@@ -1,0 +1,107 @@
+<svg viewBox="0 0 1000 640" xmlns="http://www.w3.org/2000/svg" font-family="Verdana, Arial, sans-serif">
+  <rect x="0" y="0" width="1000" height="640" fill="#f6f2e9"/>
+  <text x="500" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#26324a">Ishikawa (Fishbone) Diagram — Root Causes</text>
+
+  <!-- spine -->
+  <line x1="120" y1="320" x2="820" y2="320" stroke="#26324a" stroke-width="3"/>
+  <polygon points="820,308 855,320 820,332" fill="#26324a"/>
+
+  <!-- head / problem box -->
+  <rect x="855" y="285" width="130" height="70" rx="8" fill="#a8452f" stroke="#26324a" stroke-width="1.5"/>
+  <text x="920" y="312" text-anchor="middle" font-size="11.5" fill="#fff" font-weight="bold">Unresolved /</text>
+  <text x="920" y="328" text-anchor="middle" font-size="11.5" fill="#fff" font-weight="bold">Poorly Reported</text>
+  <text x="920" y="344" text-anchor="middle" font-size="11.5" fill="#fff" font-weight="bold">Issues</text>
+
+  <!-- helper to draw a bone: category label box + diagonal spine + cause lines -->
+  <!-- TOP LEFT: People -->
+  <g>
+    <line x1="200" y1="320" x2="270" y2="130" stroke="#c37a2e" stroke-width="2.2"/>
+    <rect x="220" y="90" width="120" height="34" rx="6" fill="#fdf1de" stroke="#c37a2e" stroke-width="1.5"/>
+    <text x="280" y="112" text-anchor="middle" font-size="13" font-weight="bold" fill="#26324a">People</text>
+    <g font-size="11" fill="#26324a">
+      <line x1="235" y1="200" x2="257" y2="184" stroke="#7a7264"/>
+      <text x="130" y="205">Mutual distrust / stereotypes</text>
+      <line x1="248" y1="238" x2="270" y2="222" stroke="#7a7264"/>
+      <text x="140" y="243">Cultural / language differences</text>
+      <line x1="260" y1="276" x2="282" y2="260" stroke="#7a7264"/>
+      <text x="150" y="281">Weak conflict-resolution skills</text>
+    </g>
+  </g>
+
+  <!-- TOP MIDDLE: Communication -->
+  <g>
+    <line x1="380" y1="320" x2="450" y2="130" stroke="#c37a2e" stroke-width="2.2"/>
+    <rect x="400" y="90" width="150" height="34" rx="6" fill="#fdf1de" stroke="#c37a2e" stroke-width="1.5"/>
+    <text x="475" y="112" text-anchor="middle" font-size="13" font-weight="bold" fill="#26324a">Communication</text>
+    <g font-size="11" fill="#26324a">
+      <line x1="415" y1="200" x2="437" y2="184" stroke="#7a7264"/>
+      <text x="330" y="205">No formal reporting channel</text>
+      <line x1="428" y1="238" x2="450" y2="222" stroke="#7a7264"/>
+      <text x="340" y="243">Rumour spreads faster than facts</text>
+      <line x1="440" y1="276" x2="462" y2="260" stroke="#7a7264"/>
+      <text x="350" y="281">Reports get lost / no follow-up</text>
+    </g>
+  </g>
+
+  <!-- TOP RIGHT: Technology -->
+  <g>
+    <line x1="590" y1="320" x2="660" y2="130" stroke="#c37a2e" stroke-width="2.2"/>
+    <rect x="610" y="90" width="140" height="34" rx="6" fill="#fdf1de" stroke="#c37a2e" stroke-width="1.5"/>
+    <text x="680" y="112" text-anchor="middle" font-size="13" font-weight="bold" fill="#26324a">Technology</text>
+    <g font-size="11" fill="#26324a">
+      <line x1="625" y1="200" x2="647" y2="184" stroke="#7a7264"/>
+      <text x="590" y="205">No digital reporting platform</text>
+      <line x1="638" y1="238" x2="660" y2="222" stroke="#7a7264"/>
+      <text x="600" y="243">Limited internet access in host towns</text>
+      <line x1="650" y1="276" x2="672" y2="260" stroke="#7a7264"/>
+      <text x="610" y="281">Low smartphone literacy for some users</text>
+    </g>
+  </g>
+
+  <!-- BOTTOM LEFT: Process -->
+  <g>
+    <line x1="200" y1="320" x2="270" y2="510" stroke="#4c7a63" stroke-width="2.2"/>
+    <rect x="220" y="520" width="120" height="34" rx="6" fill="#e8f2ec" stroke="#4c7a63" stroke-width="1.5"/>
+    <text x="280" y="542" text-anchor="middle" font-size="13" font-weight="bold" fill="#26324a">Process</text>
+    <g font-size="11" fill="#26324a">
+      <line x1="235" y1="440" x2="257" y2="456" stroke="#7a7264"/>
+      <text x="120" y="437">No structured escalation path</text>
+      <line x1="248" y1="405" x2="270" y2="421" stroke="#7a7264"/>
+      <text x="140" y="402">Delayed response to reports</text>
+      <line x1="260" y1="370" x2="282" y2="386" stroke="#7a7264"/>
+      <text x="150" y="367">No tracking / status updates</text>
+    </g>
+  </g>
+
+  <!-- BOTTOM MIDDLE: Environment -->
+  <g>
+    <line x1="380" y1="320" x2="450" y2="510" stroke="#4c7a63" stroke-width="2.2"/>
+    <rect x="395" y="520" width="150" height="34" rx="6" fill="#e8f2ec" stroke="#4c7a63" stroke-width="1.5"/>
+    <text x="470" y="542" text-anchor="middle" font-size="13" font-weight="bold" fill="#26324a">Environment</text>
+    <g font-size="11" fill="#26324a">
+      <line x1="415" y1="440" x2="437" y2="456" stroke="#7a7264"/>
+      <text x="320" y="437">Off-campus incidents hard to monitor</text>
+      <line x1="428" y1="405" x2="450" y2="421" stroke="#7a7264"/>
+      <text x="340" y="402">Shared, congested living spaces</text>
+      <line x1="440" y1="370" x2="462" y2="386" stroke="#7a7264"/>
+      <text x="350" y="367">Security concerns after dark</text>
+    </g>
+  </g>
+
+  <!-- BOTTOM RIGHT: Policy -->
+  <g>
+    <line x1="590" y1="320" x2="660" y2="510" stroke="#4c7a63" stroke-width="2.2"/>
+    <rect x="615" y="520" width="130" height="34" rx="6" fill="#e8f2ec" stroke="#4c7a63" stroke-width="1.5"/>
+    <text x="680" y="542" text-anchor="middle" font-size="13" font-weight="bold" fill="#26324a">Policy</text>
+    <g font-size="11" fill="#26324a">
+      <line x1="625" y1="440" x2="647" y2="456" stroke="#7a7264"/>
+      <text x="580" y="437">No clear community-relations guideline</text>
+      <line x1="638" y1="405" x2="660" y2="421" stroke="#7a7264"/>
+      <text x="600" y="402">Weak enforcement / accountability</text>
+      <line x1="650" y1="370" x2="672" y2="386" stroke="#7a7264"/>
+      <text x="610" y="367">Roles of student affairs unclear</text>
+    </g>
+  </g>
+
+  <text x="500" y="615" text-anchor="middle" font-size="12" fill="#7a7264">Fig. B — Ishikawa diagram: causes of unresolved issues between AAUA students and host indigenes</text>
+</svg>

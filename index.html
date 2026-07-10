@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRO — Issues Reporting Outlet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#26324a;
+    --paper:#f6f2e9;
+    --panel:#ffffff;
+    --ochre:#c37a2e;
+    --ochre-dark:#a8631f;
+    --sage:#4c7a63;
+    --brick:#a8452f;
+    --line:#e1d8c4;
+    --muted:#7a7264;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.5;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  header{
+    background:var(--ink);
+    color:var(--paper);
+    padding:28px 24px 22px;
+    position:relative;
+    overflow:hidden;
+  }
+  header .bridge{
+    position:absolute;
+    right:-30px; top:-40px;
+    width:220px; height:220px;
+    border:3px solid rgba(246,242,233,0.12);
+    border-radius:50%;
+  }
+  header .eyebrow{
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ochre);
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  header h1{
+    font-size:30px;
+    font-weight:600;
+  }
+  header p{
+    max-width:560px;
+    color:#cfd3de;
+    font-size:14.5px;
+    margin-top:8px;
+  }
+  .communities{
+    display:flex; gap:8px; flex-wrap:wrap;
+    margin-top:16px;
+  }
+  .communities span{
+    font-size:11.5px;
+    border:1px solid rgba(246,242,233,0.25);
+    padding:4px 10px;
+    border-radius:20px;
+    color:#e3e6ee;
+  }
+  nav{
+    display:flex;
+    background:var(--panel);
+    border-bottom:1px solid var(--line);
+    position:sticky; top:0; z-index:5;
+  }
+  nav button{
+    flex:1;
+    padding:14px 8px;
+    border:none;
+    background:none;
+    font-family:'Work Sans', sans-serif;
+    font-size:14px;
+    font-weight:600;
+    color:var(--muted);
+    cursor:pointer;
+    border-bottom:3px solid transparent;
+    transition:color .15s, border-color .15s;
+  }
+  nav button.active{
+    color:var(--ink);
+    border-bottom-color:var(--ochre);
+  }
+  main{
+    max-width:640px;
+    margin:0 auto;
+    padding:26px 20px 60px;
+  }
+  .view{ display:none; animation:fade .25s ease; }
+  .view.active{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;} }
+
+  .card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:22px;
+    margin-bottom:18px;
+  }
+  label{
+    display:block;
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--muted);
+    margin:14px 0 6px;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+  }
+  label:first-of-type{ margin-top:0; }
+  input, select, textarea{
+    width:100%;
+    padding:10px 12px;
+    border:1px solid var(--line);
+    border-radius:7px;
+    font-family:'Work Sans', sans-serif;
+    font-size:14.5px;
+    background:#fffdf9;
+    color:var(--ink);
+  }
+  textarea{ min-height:90px; resize:vertical; }
+  .role-toggle{ display:flex; gap:8px; }
+  .role-toggle button{
+    flex:1;
+    padding:9px;
+    border:1px solid var(--line);
+    background:#fffdf9;
+    border-radius:7px;
+    font-weight:600;
+    font-size:13.5px;
+    cursor:pointer;
+    color:var(--muted);
+  }
+  .role-toggle button.selected{
+    background:var(--ink);
+    color:var(--paper);
+    border-color:var(--ink);
+  }
+  .submit-btn{
+    margin-top:20px;
+    width:100%;
+    padding:13px;
+    background:var(--ochre);
+    color:#fff;
+    border:none;
+    border-radius:7px;
+    font-weight:600;
+    font-size:15px;
+    cursor:pointer;
+    font-family:'Work Sans', sans-serif;
+  }
+  .submit-btn:hover{ background:var(--ochre-dark); }
+
+  .receipt{
+    display:none;
+    text-align:center;
+    padding:22px;
+  }
+  .receipt .ref{
+    font-family:'Fraunces', serif;
+    font-size:26px;
+    font-weight:600;
+    color:var(--sage);
+    margin:10px 0;
+    letter-spacing:0.02em;
+  }
+
+  .track-result{ margin-top:16px; }
+  .status-pill{
+    display:inline-block;
+    padding:4px 12px;
+    border-radius:20px;
+    font-size:12.5px;
+    font-weight:600;
+  }
+  .status-Received{ background:#eef1e9; color:var(--sage); }
+  .status-Under-Review{ background:#fdf1de; color:var(--ochre-dark); }
+  .status-Resolved{ background:#e8f2ec; color:var(--sage); }
+  .status-Escalated{ background:#f8e7e2; color:var(--brick); }
+
+  .issue-row{
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:14px;
+    margin-bottom:10px;
+    background:#fffdf9;
+  }
+  .issue-row .top{
+    display:flex; justify-content:space-between; align-items:center; gap:8px;
+    margin-bottom:6px;
+  }
+  .issue-row .top strong{ font-size:14px; }
+  .issue-row .meta{ font-size:12px; color:var(--muted); margin-bottom:6px; }
+  .issue-row select{ margin-top:6px; }
+  .empty{
+    text-align:center;
+    color:var(--muted);
+    font-size:13.5px;
+    padding:30px 10px;
+  }
+  .stat-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin-bottom:18px;
+  }
+  .stat-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:14px;
+    text-align:center;
+  }
+  .stat-card .num{
+    font-family:'Fraunces', serif;
+    font-size:26px;
+    font-weight:600;
+  }
+  .stat-card .lbl{ font-size:11.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.04em; }
+  .hint{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  footer{
+    text-align:center;
+    font-size:11.5px;
+    color:var(--muted);
+    padding:14px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bridge"></div>
+  <div class="eyebrow">AAUA · Akungba · Iwaro · Etioro · Ayegunle</div>
+  <h1>IRO — Issues Reporting Outlet</h1>
+  <p>A shared channel for students and host-community indigenes to report issues, track their outcome, and see them resolved fairly.</p>
+  <div class="communities">
+    <span>Students</span><span>Akungba</span><span>Iwaro</span><span>Etioro</span><span>Ayegunle</span>
+  </div>
+</header>
+
+<nav>
+  <button class="tab-btn active" data-view="report">Report</button>
+  <button class="tab-btn" data-view="track">Track</button>
+  <button class="tab-btn" data-view="admin">Admin</button>
+</nav>
+
+<main>
+
+  <!-- REPORT VIEW -->
+  <section class="view active" id="view-report">
+    <div class="card" id="report-form-card">
+      <h2 style="font-size:19px;">Submit a report</h2>
+      <p class="hint">Your report goes straight to the review team. You'll get a reference number to track it.</p>
+
+      <label>I am reporting as</label>
+      <div class="role-toggle">
+        <button type="button" class="role-btn selected" data-role="Student">Student</button>
+        <button type="button" class="role-btn" data-role="Indigene">Indigene</button>
+      </div>
+
+      <label for="community">Community involved</label>
+      <select id="community">
+        <option>Akungba</option>
+        <option>Iwaro</option>
+        <option>Etioro</option>
+        <option>Ayegunle</option>
+        <option>Other / Not sure</option>
+      </select>
+
+      <label for="category">Issue category</label>
+      <select id="category">
+        <option>Land / Property Dispute</option>
+        <option>Harassment</option>
+        <option>Noise / Disturbance</option>
+        <option>Utility / Rent Dispute</option>
+        <option>Security Concern</option>
+        <option>Other</option>
+      </select>
+
+      <label for="description">Describe the issue</label>
+      <textarea id="description" placeholder="What happened, when, and where?"></textarea>
+
+      <label for="contact">Contact (phone or email, optional)</label>
+      <input type="text" id="contact" placeholder="For follow-up only — kept private">
+
+      <button class="submit-btn" id="submit-btn">Submit report</button>
+    </div>
+
+    <div class="card receipt" id="receipt-card">
+      <div class="hint">Your report has been received</div>
+      <div class="ref" id="ref-number">IRO-0000</div>
+      <p class="hint">Save this reference number — use it in the Track tab to check progress.</p>
+      <button class="submit-btn" id="new-report-btn" style="background:var(--ink);">Submit another report</button>
+    </div>
+  </section>
+
+  <!-- TRACK VIEW -->
+  <section class="view" id="view-track">
+    <div class="card">
+      <h2 style="font-size:19px;">Track a report</h2>
+      <label for="track-ref">Reference number</label>
+      <input type="text" id="track-ref" placeholder="e.g. IRO-1001">
+      <button class="submit-btn" id="track-btn">Check status</button>
+      <div class="track-result" id="track-result"></div>
+    </div>
+  </section>
+
+  <!-- ADMIN VIEW -->
+  <section class="view" id="view-admin">
+    <div class="stat-grid" id="stat-grid"></div>
+    <div class="card">
+      <h2 style="font-size:19px; margin-bottom:10px;">All reports</h2>
+      <div id="issue-list"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>IRO Prototype — CSC426 Weekend 3 Dev &nbsp;|&nbsp; data resets on page reload (demo mode)</footer>
+
+<script>
+  // --- in-memory data store (demo only — resets on reload, as noted above) ---
+  let reports = [];
+  let nextRef = 1001;
+  let selectedRole = "Student";
+
+  const $ = sel => document.querySelector(sel);
+  const $$ = sel => document.querySelectorAll(sel);
+
+  // Tab navigation
+  $$('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      $$('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      $$('.view').forEach(v => v.classList.remove('active'));
+      document.getElementById('view-' + btn.dataset.view).classList.add('active');
+      if (btn.dataset.view === 'admin') renderAdmin();
+    });
+  });
+
+  // Role toggle
+  $$('.role-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      $$('.role-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedRole = btn.dataset.role;
+    });
+  });
+
+  // Submit report
+  $('#submit-btn').addEventListener('click', () => {
+    const description = $('#description').value.trim();
+    if (!description) {
+      $('#description').style.borderColor = 'var(--brick)';
+      $('#description').focus();
+      return;
+    }
+    const report = {
+      ref: 'IRO-' + nextRef++,
+      role: selectedRole,
+      community: $('#community').value,
+      category: $('#category').value,
+      description,
+      contact: $('#contact').value.trim(),
+      status: 'Received',
+      submitted: new Date().toLocaleString()
+    };
+    reports.push(report);
+
+    $('#report-form-card').style.display = 'none';
+    $('#receipt-card').style.display = 'block';
+    $('#ref-number').textContent = report.ref;
+
+    // reset form fields for next time
+    $('#description').value = '';
+    $('#contact').value = '';
+    $('#description').style.borderColor = 'var(--line)';
+  });
+
+  $('#new-report-btn').addEventListener('click', () => {
+    $('#receipt-card').style.display = 'none';
+    $('#report-form-card').style.display = 'block';
+  });
+
+  // Track report
+  $('#track-btn').addEventListener('click', () => {
+    const ref = $('#track-ref').value.trim().toUpperCase();
+    const found = reports.find(r => r.ref === ref);
+    const box = $('#track-result');
+    if (!found) {
+      box.innerHTML = '<p class="hint">No report found with that reference number. Double-check it and try again.</p>';
+      return;
+    }
+    box.innerHTML = `
+      <div class="issue-row">
+        <div class="top">
+          <strong>${found.ref}</strong>
+          <span class="status-pill status-${found.status.replace(' ', '-')}">${found.status}</span>
+        </div>
+        <div class="meta">${found.role} · ${found.community} · ${found.category}</div>
+        <div class="meta">Submitted ${found.submitted}</div>
+        <p style="font-size:13.5px; margin:8px 0 0;">${found.description}</p>
+      </div>`;
+  });
+
+  // Admin view
+  function renderAdmin() {
+    const statuses = ['Received', 'Under Review', 'Resolved', 'Escalated'];
+    const counts = { Received: 0, 'Under Review': 0, Resolved: 0, Escalated: 0 };
+    reports.forEach(r => counts[r.status]++);
+
+    $('#stat-grid').innerHTML = `
+      <div class="stat-card"><div class="num">${reports.length}</div><div class="lbl">Total reports</div></div>
+      <div class="stat-card"><div class="num">${counts.Resolved}</div><div class="lbl">Resolved</div></div>
+      <div class="stat-card"><div class="num">${counts['Under Review']}</div><div class="lbl">Under review</div></div>
+      <div class="stat-card"><div class="num">${counts.Escalated}</div><div class="lbl">Escalated</div></div>
+    `;
+
+    const list = $('#issue-list');
+    if (!reports.length) {
+      list.innerHTML = '<div class="empty">No reports submitted yet. Try the Report tab.</div>';
+      return;
+    }
+    list.innerHTML = reports.slice().reverse().map(r => `
+      <div class="issue-row">
+        <div class="top">
+          <strong>${r.ref}</strong>
+          <span class="status-pill status-${r.status.replace(' ', '-')}">${r.status}</span>
+        </div>
+        <div class="meta">${r.role} · ${r.community} · ${r.category} · ${r.submitted}</div>
+        <p style="font-size:13.5px; margin:0 0 6px;">${r.description}</p>
+        <label style="margin:6px 0 2px;">Update status</label>
+        <select data-ref="${r.ref}" class="status-select">
+          ${statuses.map(s => `<option ${s === r.status ? 'selected' : ''}>${s}</option>`).join('')}
+        </select>
+      </div>
+    `).join('');
+
+    $$('.status-select').forEach(sel => {
+      sel.addEventListener('change', e => {
+        const rep = reports.find(r => r.ref === e.target.dataset.ref);
+        rep.status = e.target.value;
+        renderAdmin();
+      });
+    });
+  }
+
+  renderAdmin();
+</script>
+</body>
+</html>

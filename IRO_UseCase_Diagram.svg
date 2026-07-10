@@ -1,0 +1,97 @@
+<svg viewBox="0 0 900 620" xmlns="http://www.w3.org/2000/svg" font-family="Verdana, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#7a7264"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="620" fill="#f6f2e9"/>
+
+  <!-- System boundary -->
+  <rect x="230" y="40" width="470" height="520" rx="14" fill="#ffffff" stroke="#26324a" stroke-width="2"/>
+  <text x="465" y="70" text-anchor="middle" font-size="17" font-weight="bold" fill="#26324a">IRO — Issues Reporting Outlet</text>
+
+  <!-- Use case ellipses -->
+  <g font-size="12.5" fill="#26324a">
+    <ellipse cx="345" cy="115" rx="90" ry="30" fill="#fdf1de" stroke="#c37a2e" stroke-width="1.5"/>
+    <text x="345" y="119" text-anchor="middle">Register / Login</text>
+
+    <ellipse cx="345" cy="195" rx="95" ry="32" fill="#fdf1de" stroke="#c37a2e" stroke-width="1.5"/>
+    <text x="345" y="191" text-anchor="middle">Submit Issue</text>
+    <text x="345" y="206" text-anchor="middle">Report</text>
+
+    <ellipse cx="345" cy="280" rx="95" ry="32" fill="#fdf1de" stroke="#c37a2e" stroke-width="1.5"/>
+    <text x="345" y="276" text-anchor="middle">Track Issue</text>
+    <text x="345" y="291" text-anchor="middle">Status</text>
+
+    <ellipse cx="345" cy="365" rx="95" ry="30" fill="#e8f2ec" stroke="#4c7a63" stroke-width="1.5"/>
+    <text x="345" y="369" text-anchor="middle">Receive Notification</text>
+
+    <ellipse cx="580" cy="140" rx="95" ry="32" fill="#e8f2ec" stroke="#4c7a63" stroke-width="1.5"/>
+    <text x="580" y="136" text-anchor="middle">Review Issue</text>
+    <text x="580" y="151" text-anchor="middle">List</text>
+
+    <ellipse cx="580" cy="235" rx="95" ry="32" fill="#e8f2ec" stroke="#4c7a63" stroke-width="1.5"/>
+    <text x="580" y="231" text-anchor="middle">Update Issue</text>
+    <text x="580" y="246" text-anchor="middle">Status</text>
+
+    <ellipse cx="580" cy="330" rx="95" ry="32" fill="#e8f2ec" stroke="#4c7a63" stroke-width="1.5"/>
+    <text x="580" y="326" text-anchor="middle">Generate Summary</text>
+    <text x="580" y="341" text-anchor="middle">Report</text>
+  </g>
+
+  <!-- Include relation -->
+  <line x1="345" y1="227" x2="345" y2="248" stroke="#7a7264" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="352" y="240" font-size="10.5" fill="#7a7264">&lt;&lt;include&gt;&gt;</text>
+
+  <!-- Actors -->
+  <g stroke="#26324a" stroke-width="2" fill="none">
+    <!-- Student -->
+    <g transform="translate(60,150)">
+      <circle cx="0" cy="0" r="14" fill="#fff"/>
+      <line x1="0" y1="14" x2="0" y2="55"/>
+      <line x1="-22" y1="30" x2="22" y2="30"/>
+      <line x1="0" y1="55" x2="-18" y2="90"/>
+      <line x1="0" y1="55" x2="18" y2="90"/>
+    </g>
+    <text x="60" y="118" text-anchor="middle" font-size="13" font-weight="bold" fill="#26324a" stroke="none">Student</text>
+
+    <!-- Indigene -->
+    <g transform="translate(60,320)">
+      <circle cx="0" cy="0" r="14" fill="#fff"/>
+      <line x1="0" y1="14" x2="0" y2="55"/>
+      <line x1="-22" y1="30" x2="22" y2="30"/>
+      <line x1="0" y1="55" x2="-18" y2="90"/>
+      <line x1="0" y1="55" x2="18" y2="90"/>
+    </g>
+    <text x="60" y="428" text-anchor="middle" font-size="13" font-weight="bold" fill="#26324a" stroke="none">Indigene</text>
+
+    <!-- Administrator -->
+    <g transform="translate(830,235)">
+      <circle cx="0" cy="0" r="14" fill="#fff"/>
+      <line x1="0" y1="14" x2="0" y2="55"/>
+      <line x1="-22" y1="30" x2="22" y2="30"/>
+      <line x1="0" y1="55" x2="-18" y2="90"/>
+      <line x1="0" y1="55" x2="18" y2="90"/>
+    </g>
+    <text x="830" y="345" text-anchor="middle" font-size="13" font-weight="bold" fill="#26324a" stroke="none">Administrator</text>
+  </g>
+
+  <!-- Actor - use case associations -->
+  <g stroke="#7a7264" stroke-width="1.3">
+    <line x1="88" y1="150" x2="255" y2="118"/>
+    <line x1="88" y1="160" x2="250" y2="198"/>
+    <line x1="88" y1="180" x2="250" y2="278"/>
+    <line x1="88" y1="220" x2="250" y2="360"/>
+
+    <line x1="88" y1="330" x2="250" y2="285"/>
+    <line x1="88" y1="340" x2="250" y2="200"/>
+    <line x1="88" y1="360" x2="250" y2="365"/>
+    <line x1="88" y1="300" x2="255" y2="122"/>
+
+    <line x1="802" y1="235" x2="675" y2="140"/>
+    <line x1="802" y1="245" x2="675" y2="235"/>
+    <line x1="802" y1="255" x2="675" y2="330"/>
+  </g>
+
+  <text x="450" y="600" text-anchor="middle" font-size="12" fill="#7a7264">Fig. A — IRO Use-Case Diagram (Student, Indigene, Administrator)</text>
+</svg>
